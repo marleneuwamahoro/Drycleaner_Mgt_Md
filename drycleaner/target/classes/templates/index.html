@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Landing Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      color: #333;
+    }
+    header {
+      background: #282c34;
+      color: white;
+      padding: 1.5rem 0;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+    }
+    nav {
+      background-color: #444;
+      padding: 10px 0;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+    }
+    nav ul li {
+      margin: 0 15px;
+    }
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      padding: 10px 15px;
+      transition: background 0.3s;
+    }
+    nav ul li a:hover {
+      background: #ff5733;
+      border-radius: 5px;
+    }
+    .hero {
+      background: url('https://via.placeholder.com/1200x600') no-repeat center center/cover;
+      height: 60vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+      padding: 0 20px;
+    }
+    .hero h2 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+    .cta {
+      padding: 10px 30px;
+      background: #ff5733;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .cta:hover {
+      background: #ff6f4f;
+    }
+    .about, .features {
+      padding: 50px 20px;
+      text-align: center;
+    }
+    .about h2, .features h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+    .about p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .features {
+      background: #f4f4f4;
+    }
+    .feature-list {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    .feature-item {
+      width: 30%;
+      text-align: center;
+      margin: 20px 0;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .feature-item h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+    .footer {
+      background: #282c34;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 1rem;
+    }
+    .social-icons a {
+      margin: 0 10px;
+      color: white;
+      font-size: 1.5rem;
+      transition: color 0.3s;
+    }
+    .social-icons a:hover {
+      color: #ff5733;
+    }
+    @media (max-width: 768px) {
+      .feature-item {
+        width: 80%;
+      }
+      .hero h2 {
+        font-size: 2.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Welcome to Our Website</h1>
+  <nav>
+    <ul>
+      <li><a th:href="@{/}">Home</a></li>
+      <li><a th:href="@{/login}">Login</a></li>
+      <li><a th:href="@{/signup}">Sign Up</a></li>
+      <li><a th:href="@{/change-language(lang='en')}">English</a></li>
+      <li><a th:href="@{/change-language(lang='fr')}">French</a></li>
+      <li><a th:href="@{/change-language(lang='es')}">Spanish</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- Hero Section -->
+<section class="hero">
+  <h2>Your Journey Begins Here</h2>
+  <p>Explore our offerings and discover something new every day.</p>
+  <button class="cta">Get Started</button>
+</section>
+
+<!-- About Section -->
+<section class="about">
+  <h2>About Us</h2>
+  <p>We are a leading company in our industry, offering top-notch products and services. Our mission is to deliver quality and value to our customers.</p>
+</section>
+
+<!-- Features Section -->
+<section class="features">
+  <h2>Our Features</h2>
+  <div class="feature-list">
+    <div class="feature-item">
+      <i class="fas fa-cog fa-2x" style="color: #ff5733;"></i>
+      <h3>Feature 1</h3>
+      <p>Short description of Feature 1</p>
+    </div>
+    <div class="feature-item">
+      <i class="fas fa-star fa-2x" style="color: #ff5733;"></i>
+      <h3>Feature 2</h3>
+      <p>Short description of Feature 2</p>
+    </div>
+    <div class="feature-item">
+      <i class="fas fa-shield-alt fa-2x" style="color: #ff5733;"></i>
+      <h3>Feature 3</h3>
+      <p>Short description of Feature 3</p>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="social-icons">
+    <a href="#"><i class="fab fa-facebook-f"></i></a>
+    <a href="#"><i class="fab fa-twitter"></i></a>
+    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+  </div>
+  <p>&copy; 2024 Your Company Name | All rights reserved</p>
+</footer>
+
+</body>
+</html>

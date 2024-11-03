@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Upload</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f6f9fc 0%, #edf2f7 100%);
+            color: #1a1a1a;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 700px;
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #3182ce 0%, #2c5282 100%);
+            padding: 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .header h2 {
+            font-size: 1.875rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .content {
+            padding: 2rem;
+        }
+
+        /* Message Styling */
+        .message {
+            padding: 1rem;
+            border-radius: 0.75rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .success-message {
+            background-color: #c6f6d5;
+            color: #2f855a;
+            border: 1px solid #9ae6b4;
+        }
+
+        .error-message {
+            background-color: #fed7d7;
+            color: #c53030;
+            border: 1px solid #feb2b2;
+        }
+
+        /* Upload Area Styling */
+        .upload-area {
+            border: 2px dashed #e2e8f0;
+            border-radius: 1rem;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .upload-area:hover {
+            border-color: #3182ce;
+            background-color: #f7fafc;
+        }
+
+        .upload-label {
+            display: block;
+            margin-bottom: 1rem;
+            font-weight: 500;
+            color: #4a5568;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .custom-file-upload {
+            background-color: #3182ce;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            display: inline-block;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .custom-file-upload:hover {
+            background-color: #2c5282;
+            transform: translateY(-1px);
+        }
+
+        /* File List Styling */
+        .file-list {
+            margin-top: 2rem;
+        }
+
+        .file-list h3 {
+            color: #2d3748;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .file-list ul {
+            list-style: none;
+            background: #f7fafc;
+            border-radius: 0.75rem;
+            overflow: hidden;
+        }
+
+        .file-list li {
+            padding: 1rem;
+            border-bottom: 1px solid #edf2f7;
+            transition: background-color 0.3s ease;
+        }
+
+        .file-list li:last-child {
+            border-bottom: none;
+        }
+
+        .file-list li:hover {
+            background-color: #edf2f7;
+        }
+
+        .file-list a {
+            text-decoration: none;
+            color: #3182ce;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .file-list a:hover {
+            color: #2c5282;
+        }
+
+        /* Button Styling */
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .button {
+            flex: 1;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .upload-button {
+            background-color: #3182ce;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .upload-button:hover {
+            background-color: #2c5282;
+            transform: translateY(-1px);
+        }
+
+        .back-button {
+            background-color: #718096;
+            color: white;
+        }
+
+        .back-button:hover {
+            background-color: #4a5568;
+            transform: translateY(-1px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 640px) {
+            body {
+                padding: 1rem;
+            }
+
+            .content {
+                padding: 1.5rem;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h2>Resume Upload</h2>
+        <p>Upload your resume in PDF or DOC format</p>
+    </div>
+
+    <div class="content">
+        <!-- Messages -->
+        <div th:if="${successMessage}" class="message success-message">
+            <p th:text="${successMessage}"></p>
+        </div>
+        <div th:if="${errorMessage}" class="message error-message">
+            <p th:text="${errorMessage}"></p>
+        </div>
+
+        <!-- Upload Form -->
+        <form action="#" th:action="@{/upload}" method="post" enctype="multipart/form-data">
+            <div class="upload-area">
+                <label class="upload-label">Choose a file or drag it here</label>
+                <label class="custom-file-upload">
+                    <input type="file" name="file" required>
+                    Browse Files
+                </label>
+            </div>
+            <button type="submit" class="button upload-button">Upload Resume</button>
+        </form>
+
+        <!-- File List -->
+        <div class="file-list">
+            <h3>Uploaded Resumes</h3>
+            <ul>
+                <li th:each="file : ${files}">
+                    <a th:href="@{/files/download/{id}(id=${file.id})}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                            <polyline points="13 2 13 9 20 9"></polyline>
+                        </svg>
+                        <span th:text="${file.resumeFileName}"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Button Group -->
+        <div class="button-group">
+            <a th:href="@{/AdminDashboard}" class="button back-button">Back to Dashboard</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
